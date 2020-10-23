@@ -1,13 +1,13 @@
 #!/usr/bin/python3
 """
-1-fifo.cache: module to create a FIFOCache Class
+2-lifo_cache: module to create a LIFOCache Class
 You must use self.cache_data - dictionary from the parent class BaseCaching
 """
 from base_caching import BaseCaching
 
 
-class FIFOCache(BaseCaching):
-    """FIFOCache:inherits from BaseCaching and is a caching system
+class LIFOCache(BaseCaching):
+    """LIFOCache:inherits from BaseCaching and is a caching system
     """
     def __init__(self):
         """
@@ -18,21 +18,26 @@ class FIFOCache(BaseCaching):
 
     def put(self, key, item):
         """
-        Must assign to the dictionary self.cache_data the item value for
-        the key key.
+        Must assign to the dictionary self.cache_data the item value
+        for the key key.
         If key or item is None, this method should not do anything.
         If the number of items in self.cache_data is higher that
         BaseCaching.MAX_ITEMS:
-            you must discard the first item put in cache (FIFO algorithm)
-            you must print DISCARD: with the key discarded and following
-            by a new line
+            you must discard the last item put in cache (LIFO algorithm)
+            you must print DISCARD: with the key discarded and following by
+            a new line
         """
-
         if key and item:
+            # if key in dict shout be delete to enumerate correctly
+            if key in self.cache_data:
+                self.cache_data.pop(key)
             self.cache_data[key] = item
+            x = enumerate(self.cache_data)
             if len(self.cache_data) > BaseCaching.MAX_ITEMS:
-                x = enumerate(self.cache_data)
-                w = next(x)  # firs in
+                next(x)
+                next(x)
+                next(x)
+                w = next(x)  # last in
                 self.cache_data.pop(w[1])  # firs out
                 print(f"DISCARD: {w[1]}")
         return None
@@ -46,32 +51,3 @@ class FIFOCache(BaseCaching):
         if key in self.cache_data and key:
             return self.cache_data[key]
         return None
-
-
-"""mini test: if __name__ == '__main__':
-    a = FIFOCache()
-    print(dir(a))
-    a.print_cache()
-    a.put("uno","dos")
-    a.put("tres","cuatro")
-    a.put("cinco","seis")
-    a.put("siete","ocho")
-    a.print_cache()
-    x=enumerate(a.cache_data)
-    print(next(x))
-    print(next(x))
-    print(next(x))
-    print(next(x))
-    print(x)
-    a.put("nueve","deiz")
-    #x=enumerate(a.cache_data)
-    #print(next(x))
-    #print(next(x))
-    #print(next(x))
-    #print(next(x))
-    a.print_cache()
-    a.put("once","doce")
-    a.print_cache()
-    a.put("trece","catorce")
-    a.print_cache()
-"""

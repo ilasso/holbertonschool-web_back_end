@@ -18,7 +18,8 @@ class BasicCache(BaseCaching):
     def put(self, key, item):
         """
         def put(self, key, item):
-            Must assign to the dictionary self.cache_data the item value for the key
+            Must assign to the dictionary self.cache_data the item value
+            for the key
             If key or item is None, this method should not do anything.
         """
         if key and item:
