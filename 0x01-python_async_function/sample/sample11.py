@@ -6,7 +6,7 @@ Las callbacks se invocan en el orden en que están registrados
 La callback debe esperar un argumento, la instancia Future.
 Para pasar argumentos adicionales a las calbacks,
 use functools.partial() para crear un envoltorio.
-
+https://rico-schmidt.name/pymotw-3/asyncio
 """
 import asyncio
 import functools

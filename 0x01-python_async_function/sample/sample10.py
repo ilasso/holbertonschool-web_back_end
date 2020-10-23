@@ -5,6 +5,7 @@ Un Future también se puede usar con la palabra clave await, como en este ejempl
 El resultado de Future es devuelto por await, por lo que es con frecuencia es
 posible tener el mismo código de trabajo con una co-rutina normal y una instancia
 Future.
+https://rico-schmidt.name/pymotw-3/asyncio
 """
 import asyncio
 

@@ -3,6 +3,7 @@
 Bucle de eventos simple
 instancia un bucle de eventos y ejecuta una corutina hasta que termine
 la corutina retorna un valor
+https://rico-schmidt.name/pymotw-3/asyncio
 """
 
 import asyncio

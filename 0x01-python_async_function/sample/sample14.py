@@ -3,7 +3,7 @@
 Si una tarea se cancela mientras está esperando otra operación concurrente,
  la tarea es notificada de su cancelación al elevar una excepción
  CancelledError en el punto donde está esperando.
-
+https://rico-schmidt.name/pymotw-3/asyncio
 """
 import asyncio
 
@@ -32,3 +32,9 @@ async def main(loop):
         await task
     except asyncio.CancelledError:
         print('main() also sees task as canceled')
+
+event_loop = asyncio.get_event_loop()
+try:
+    event_loop.run_until_complete(main(event_loop))
+finally:
+    event_loop.close()

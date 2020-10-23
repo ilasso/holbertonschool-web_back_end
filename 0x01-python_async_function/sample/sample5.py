@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 """encadenando coroutines usando
 funciones generradoras
- yield y decorators"""
+ yield y decorators
+https://rico-schmidt.name/pymotw-3/asyncio
+ """
 import asyncio
 
 

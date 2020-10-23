@@ -4,6 +4,7 @@
     este metodo programa la ejecucion en la proxima
     iteracion del bucle
     se usa functools.partial para poder pasar los kwargs
+    https://rico-schmidt.name/pymotw-3/asyncio
 """
 import asyncio
 import functools
