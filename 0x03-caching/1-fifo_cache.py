@@ -29,9 +29,11 @@ class FIFOCache(BaseCaching):
         """
 
         if key and item:
+            if key in self.cache_data:
+                self.cache_data.pop(key)
             self.cache_data[key] = item
-            x = enumerate(self.cache_data)
             if len(self.cache_data) > BaseCaching.MAX_ITEMS:
+                x = enumerate(self.cache_data)
                 w = next(x)  # firs in
                 self.cache_data.pop(w[1])  # firs out
                 print("DISCARD: {}".format(w[1]))
