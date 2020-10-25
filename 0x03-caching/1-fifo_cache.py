@@ -46,32 +46,3 @@ class FIFOCache(BaseCaching):
         if key in self.cache_data and key:
             return self.cache_data[key]
         return None
-
-
-"""mini test: if __name__ == '__main__':
-    a = FIFOCache()
-    print(dir(a))
-    a.print_cache()
-    a.put("uno","dos")
-    a.put("tres","cuatro")
-    a.put("cinco","seis")
-    a.put("siete","ocho")
-    a.print_cache()
-    x=enumerate(a.cache_data)
-    print(next(x))
-    print(next(x))
-    print(next(x))
-    print(next(x))
-    print(x)
-    a.put("nueve","deiz")
-    #x=enumerate(a.cache_data)
-    #print(next(x))
-    #print(next(x))
-    #print(next(x))
-    #print(next(x))
-    a.print_cache()
-    a.put("once","doce")
-    a.print_cache()
-    a.put("trece","catorce")
-    a.print_cache()
-"""
