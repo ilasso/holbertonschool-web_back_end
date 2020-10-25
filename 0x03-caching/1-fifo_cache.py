@@ -36,13 +36,14 @@ class FIFOCache(BaseCaching):
                 self.cache_data.pop(w[1])  # firs out
                 print("DISCARD: {}".format(w[1]))
 
-
     def get(self, key):
         """
         Must return the value in self.cache_data linked to key.
         If key is None or if the key doesn’t exist in self.cache_data,
         return None.
         """
+        if key is None or self.cache_data.get(key) is None:
+            return None
         if key in self.cache_data and key:
             return self.cache_data[key]
         return None
