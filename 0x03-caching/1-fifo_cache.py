@@ -34,7 +34,7 @@ class FIFOCache(BaseCaching):
                 x = enumerate(self.cache_data)
                 w = next(x)  # firs in
                 self.cache_data.pop(w[1])  # firs out
-                print(f"DISCARD: {w[1]}")
+                print("DISCARD: {}".format(w[1]))
         return None
 
     def get(self, key):
