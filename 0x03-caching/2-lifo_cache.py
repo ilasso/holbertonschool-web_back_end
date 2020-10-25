@@ -39,7 +39,7 @@ class LIFOCache(BaseCaching):
                 next(x)
                 w = next(x)  # last in
                 self.cache_data.pop(w[1])  # firs out
-                print(f"DISCARD: {w[1]}")
+                print("DISCARD: {}".format(w[1]))
         return None
 
     def get(self, key):

@@ -41,7 +41,7 @@ class MRUCache(BaseCaching):
                 next(self.lastin)
                 w = next(self.lastin)
                 self.cache_data.pop(w[1])
-                print(f"DISCARD: {w[1]}")
+                print("DISCARD: {}".format(w[1]))
         return None
 
     def get(self, key):
