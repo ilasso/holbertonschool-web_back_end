@@ -15,6 +15,7 @@ class FIFOCache(BaseCaching):
         the parent init: super().__init__()
         """
         super().__init__()
+        self.x = enumerate(self.cache_data)
 
     def put(self, key, item):
         """
@@ -29,12 +30,18 @@ class FIFOCache(BaseCaching):
         """
         if key and item:
             if key in self.cache_data:
+                del self.cache_data[key]
                 self.cache_data[key] = item
+                self.x = enumerate(self.cache_data)
+                # [ print(i) for i in self.x]
+                # print("--")
                 return
             self.cache_data[key] = item
-            x = enumerate(self.cache_data)
+            self.x = enumerate(self.cache_data)
+            # [ print(i) for i in self.x]
+            # print("--")
             if len(self.cache_data) > BaseCaching.MAX_ITEMS:
-                w = next(x)  # firs in
+                w = next(self.x)  # firs in
                 del self.cache_data[w[1]]  # firs out
                 print("DISCARD: {}".format(w[1]))
 
