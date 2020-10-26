@@ -27,10 +27,10 @@ class FIFOCache(BaseCaching):
             you must print DISCARD: with the key discarded and following
             by a new line
         """
-
         if key and item:
             if key in self.cache_data:
-                del self.cache_data[key]
+                self.cache_data[key] = item
+                return
             self.cache_data[key] = item
             x = enumerate(self.cache_data)
             if len(self.cache_data) > BaseCaching.MAX_ITEMS:
