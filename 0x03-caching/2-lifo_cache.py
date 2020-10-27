@@ -1,4 +1,4 @@
-#!/home/holberton/opt/python-3.4.3/bin/python3
+#!/usr/bin/python3
 """
 2-lifo_cache: module to create a LIFOCache Class
 You must use self.cache_data - dictionary from the parent class BaseCaching

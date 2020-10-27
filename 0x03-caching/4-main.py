@@ -1,8 +1,8 @@
-#!/usr/bin/python3
+#!/home/holberton/opt/python-3.4.3/bin/python3
 """ 4-main """
 MRUCache = __import__('4-mru_cache').MRUCache
 
-my_cache = MRUCache()
+"""my_cache = MRUCache()
 my_cache.put("A", "Hello")
 my_cache.put("B", "World")
 my_cache.put("C", "Holberton")
@@ -27,4 +27,21 @@ my_cache.print_cache()
 my_cache.put("J", "J")
 my_cache.print_cache()
 my_cache.put("K", "K")
+my_cache.print_cache()"""
+
+from base_caching import BaseCaching
+BaseCaching.MAX_ITEMS = 1
+MRUCache.MAX_ITEMS = 1
+my_cache = MRUCache()
+my_cache.MAX_ITEMS = 1
+
+my_cache.put("key-0", "value-0")
+my_cache.print_cache()
+my_cache.put("key-1", "value-1")
+my_cache.print_cache()
+my_cache.put("key-2", "value-2")
+my_cache.print_cache()
+my_cache.put("key-3", "value-3")
+my_cache.print_cache()
+my_cache.put("key-4", "value-4")
 my_cache.print_cache()

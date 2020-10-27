@@ -1,4 +1,4 @@
-#!/home/holberton/opt/python-3.4.3/bin/python3
+#!/usr/bin/python3
 """
 4-mru_cache: module to create a MRUCache Class
 You must use self.cache_data - dictionary from the parent class BaseCaching
@@ -9,14 +9,14 @@ from base_caching import BaseCaching
 class MRUCache(BaseCaching):
     """MRUCache:inherits from BaseCaching and is a caching system
     """
+
     def __init__(self):
         """
         You can overload def __init__(self): but don’t forget to call
         the parent init: super().__init__()
         """
         super().__init__()
-        self.lastin = None
-        self.prevlastint = None
+        self.lastin = enumerate(self.cache_data)
 
     def put(self, key, item):
         """
@@ -31,15 +31,17 @@ class MRUCache(BaseCaching):
         """
         if key and item:
             # if key in dict shout be delete to enumerate correctly
+            if key in self.cache_data:
+                self.cache_data.pop(key)
             self.cache_data[key] = item
-            self.lastin = key
+            self.lastin = enumerate(self.cache_data)
             if len(self.cache_data) > BaseCaching.MAX_ITEMS:
-                del self.cache_data[self.prevlastin]  # firs out
-                print("DISCARD: {}".format(self.prevlastin))
-                self.prevlastin = self.lastin
-            else:
-                self.prevlastin = self.lastin
-
+                next(self.lastin)
+                next(self.lastin)
+                next(self.lastin)
+                w = next(self.lastin)
+                self.cache_data.pop(w[1])
+                print("DISCARD: {}".format(w[1]))
         return None
 
     def get(self, key):
@@ -50,6 +52,10 @@ class MRUCache(BaseCaching):
         mark last recenty user key
         """
         if key in self.cache_data and key:
-            self.prevlastin = key
+            val = self.cache_data[key]
+            self.cache_data.pop(key)
+            self.cache_data[key] = val
+            self.lastin = enumerate(self.cache_data)  # mark last used
             return self.cache_data[key]
+
         return None
