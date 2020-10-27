@@ -1,4 +1,4 @@
-#!/home/holberton/opt/python-3.4.3/bin/python3
+#!/usr/bin/python3
 """
 2-lifo_cache: module to create a LIFOCache Class
 You must use self.cache_data - dictionary from the parent class BaseCaching
@@ -15,8 +15,6 @@ class LIFOCache(BaseCaching):
         the parent init: super().__init__()
         """
         super().__init__()
-        self.lastin = None
-        self.prevlastint = None
 
     def put(self, key, item):
         """
@@ -31,15 +29,17 @@ class LIFOCache(BaseCaching):
         """
         if key and item:
             # if key in dict shout be delete to enumerate correctly
+            if key in self.cache_data:
+                self.cache_data.pop(key)
             self.cache_data[key] = item
-            self.lastin = key
+            x = enumerate(self.cache_data)
             if len(self.cache_data) > BaseCaching.MAX_ITEMS:
-                del self.cache_data[self.prevlastin]  # firs out
-                print("DISCARD: {}".format(self.prevlastin))
-                self.prevlastin = self.lastin
-            else:
-                self.prevlastin = self.lastin
-
+                i = 0
+                while i < BaseCaching.MAX_ITEMS:
+                    w = next(x)
+                    i = i + 1
+                self.cache_data.pop(w[1])  # firs out
+                print("DISCARD: {}".format(w[1]))
         return None
 
     def get(self, key):
