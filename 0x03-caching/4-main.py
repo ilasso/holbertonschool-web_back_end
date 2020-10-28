@@ -1,4 +1,4 @@
-#!/home/holberton/opt/python-3.4.3/bin/python3
+#!/usr/bin/python3
 """ 4-main """
 MRUCache = __import__('4-mru_cache').MRUCache
 

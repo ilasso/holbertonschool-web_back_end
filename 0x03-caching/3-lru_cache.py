@@ -1,13 +1,13 @@
-#!/usr/bin/python3
+#!/home/holberton/opt/python-3.4.3/bin/python3
 """
-4-mru_cache: module to create a MRUCache Class
+3-lru_cache: module to create a LRUCache Class
 You must use self.cache_data - dictionary from the parent class BaseCaching
 """
 from base_caching import BaseCaching
 
 
-class MRUCache(BaseCaching):
-    """MRUCache:inherits from BaseCaching and is a caching system
+class LRUCache(BaseCaching):
+    """LRUCache:inherits from BaseCaching and is a caching system
     """
     def __init__(self):
         """
@@ -25,7 +25,7 @@ class MRUCache(BaseCaching):
         If key or item is None, this method should not do anything.
         If the number of items in self.cache_data is higher that
         BaseCaching.MAX_ITEMS:
-            you must discard the most recently used item (MRU algorithm)
+            you must discard the least recently used item (LRU algorithm)
             you must print DISCARD: with the key discarded and following by
             a new line
         """
