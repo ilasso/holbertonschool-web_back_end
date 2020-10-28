@@ -1,9 +1,10 @@
-#!/home/holberton/opt/python-3.4.3/bin/python3
+#!/usr/bin/python3
 """
 3-lru_cache: module to create a LRUCache Class
 You must use self.cache_data - dictionary from the parent class BaseCaching
 """
 from base_caching import BaseCaching
+from collections import OrderedDict
 
 
 class LRUCache(BaseCaching):
@@ -15,8 +16,7 @@ class LRUCache(BaseCaching):
         the parent init: super().__init__()
         """
         super().__init__()
-        self.lastin = None
-        self.prevlastint = None
+        self.cache_data = OrderedDict()
 
     def put(self, key, item):
         """
@@ -32,14 +32,13 @@ class LRUCache(BaseCaching):
         if key and item:
             # if key in dict shout be delete to enumerate correctly
             self.cache_data[key] = item
-            self.lastin = key
+            self.cache_data.move_to_end(key)
             if len(self.cache_data) > BaseCaching.MAX_ITEMS:
-                del self.cache_data[self.prevlastin]  # firs out
-                print("DISCARD: {}".format(self.prevlastin))
-                self.prevlastin = self.lastin
-            else:
-                self.prevlastin = self.lastin
-
+                for i in self.cache_data.items():
+                    discard = i
+                    break
+                self.cache_data.popitem(last=False)
+                print("DISCARD: {}".format(discard[0]))
         return None
 
     def get(self, key):
@@ -50,6 +49,6 @@ class LRUCache(BaseCaching):
         mark last recenty user key
         """
         if key in self.cache_data and key:
-            self.prevlastin = key
+            self.cache_data.move_to_end(key)
             return self.cache_data[key]
         return None
