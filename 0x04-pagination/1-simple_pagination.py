@@ -38,6 +38,7 @@ class Server:
         result = self.dataset()
         return result[start:end]
 
+
 def index_range(page: int, page_size: int) -> Tuple[int, int]:
     """
     The function should return a tuple of size two containing
