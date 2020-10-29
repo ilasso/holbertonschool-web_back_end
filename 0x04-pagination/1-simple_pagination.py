@@ -6,6 +6,8 @@ import csv
 import math
 from typing import List, Tuple
 
+index_range = __import__('0-simple_helper_function').index_range
+
 
 class Server:
     """Server class to paginate a database of popular baby names.
@@ -39,15 +41,3 @@ class Server:
             return result[start:end]
         except IndexError:
             return []
-
-
-def index_range(page: int, page_size: int) -> Tuple[int, int]:
-    """
-    The function should return a tuple of size two containing
-    a start index and an end index corresponding to the range
-    of indexes to return in a list for those particular pagination parameters.
-    """
-    if page and page_size:
-        start: int = (page - 1) * page_size
-        end: int = start + page_size
-    return (start, end)
