@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
+""" Simple helper function
 """
-1-simple_pagination
-"""
+from typing import List, Dict, Any
 import csv
 import math
-from typing import List, Tuple
+
 
 index_range = __import__('0-simple_helper_function').index_range
 
@@ -15,7 +15,6 @@ class Server:
     DATA_FILE = "Popular_Baby_Names.csv"
 
     def __init__(self):
-        """init """
         self.__dataset = None
 
     def dataset(self) -> List[List]:
@@ -26,19 +25,32 @@ class Server:
                 reader = csv.reader(f)
                 dataset = [row for row in reader]
             self.__dataset = dataset[1:]
-
         return self.__dataset
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
-        """pass"""
+        """Gets page
+        """
         assert type(page) == int and page > 0
         assert type(page_size) == int and page_size > 0
 
         start, end = index_range(page, page_size)
-
         result = []
-        try:
-            result = self.dataset()
-            return result[start:end]
-        except IndexError:
-            return []
+        if start >= len(self.dataset()):
+            return result
+        result = self.dataset()
+        return result[start:end]
+
+    def get_hyper(self, page: int = 1, page_size: int = 10) -> Dict[str, Any]:
+        """Gets an object
+        """
+        assert type(page) == int and page > 0
+        assert type(page_size) == int and page_size > 0
+
+        total_pages = math.ceil(len(self.dataset()) / page_size)
+        return {'page_size': len(self.get_page(page, page_size)),
+                'page': page,
+                'data': self.get_page(page, page_size),
+                'next_page': page + 1 if page + 1 < total_pages else None,
+                'prev_page': page - 1 if page > 1 else None,
+                'total_pages': total_pages
+                }
