@@ -35,8 +35,6 @@ class Server:
 
         result = []
         try:
-            if start >= len(self.dataset()):
-                return result
             result = self.dataset()
             return result[start:end]
         except IndexError:
