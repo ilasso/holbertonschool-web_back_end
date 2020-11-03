@@ -73,3 +73,13 @@ def get_db() -> mysql.connector.connection.MySQLConnection:
             database=os.environ.get('PERSONAL_DATA_DB_NAME', 'root'),
             user=os.environ.get('PERSONAL_DATA_DB_USERNAME'),
             password=os.environ.get('PERSONAL_DATA_DB_PASSWORD', ''))
+
+def main()
+    """
+    """
+    db = get_db()
+    cursor = db.cursor()
+    cursor.execute("SELECT * from users,")
+    result = cursor.fetchall()
+    for i in result:
+        print(i)
