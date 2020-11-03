@@ -63,11 +63,13 @@ def get_logger() -> logging.Logger:
     logger.addHandler(handler)
     return logger
 
-def get_db() -> mysql.connector.connection.MySQLConnection:
-    """returns a connector to the database"""
-    return mysql.connector.connect(
-                    host=os.environ.get('PERSONAL_DATA_DB_HOST', 'localhost'),
-                    database=os.environ.get('PERSONAL_DATA_DB_NAME', 'root'),
-                    user=os.environ.get('PERSONAL_DATA_DB_USERNAME'),
-                    password=os.environ.get('PERSONAL_DATA_DB_PASSWORD', ''))
 
+def get_db() -> mysql.connector.connection.MySQLConnection:
+    """returns a connector to the database
+        (mysql.connector.connection.MySQLConnection object)
+    """
+    return mysql.connector.connect(
+            host=os.environ.get('PERSONAL_DATA_DB_HOST', 'localhost'),
+            database=os.environ.get('PERSONAL_DATA_DB_NAME', 'root'),
+            user=os.environ.get('PERSONAL_DATA_DB_USERNAME'),
+            password=os.environ.get('PERSONAL_DATA_DB_PASSWORD', ''))
