@@ -76,11 +76,11 @@ def main():
                   f"ip={row[5]}; " + \
                   f"last_login={row[6]}; " + \
                   f"user_agent={row[7]};"
-        print(message)
-        log_record = logging.LogRecord("my_logger", logging.INFO,
+        #print(message)
+        log_record = logging.LogRecord("user_data", logging.INFO,
                                        None, None, message, None, None)
         formatter = RedactingFormatter(PII_FIELDS)
-        formatter.format(log_record)
+        print(formatter.format(log_record))
     cursor.close()
     db.close()
 if __name__ == "__main__":

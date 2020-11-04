@@ -74,12 +74,26 @@ def get_db() -> mysql.connector.connection.MySQLConnection:
             user=os.environ.get('PERSONAL_DATA_DB_USERNAME'),
             password=os.environ.get('PERSONAL_DATA_DB_PASSWORD', ''))
 
-def main()
+def main():
     """
     """
     db = get_db()
     cursor = db.cursor()
-    cursor.execute("SELECT * from users,")
+    cursor.execute("SELECT * from users;")
     result = cursor.fetchall()
     for i in result:
-        print(i)
+        msg = f"name={i[0]};" + \
+              f"email={i[1]};" + \
+              f"phone={i[2]};" + \
+              f"ssn={i[3]};"+ \
+              f"password={i[4]};" + \
+              f"ip={i[5]};" + \
+              f"last_login={i[6]};" + \
+              f"user_agent={i[7]};"
+        record = logging.LogRecord("use_data", logging.INFO, None, None, msg, None, None)
+        print(RedactingFormatter(PII_FIELDS).format(record))
+    cursor.close()
+    db.close()
+
+if __name__ == "__main__":
+    main()
