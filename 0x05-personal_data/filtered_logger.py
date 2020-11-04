@@ -74,8 +74,11 @@ def get_db() -> mysql.connector.connection.MySQLConnection:
             user=os.environ.get('PERSONAL_DATA_DB_USERNAME'),
             password=os.environ.get('PERSONAL_DATA_DB_PASSWORD', ''))
 
+
 def main():
     """
+    obtain a database connection using get_db and retrieve all rows
+    in the users table and display each row under a filtered format
     """
     db = get_db()
     cursor = db.cursor()
@@ -85,15 +88,17 @@ def main():
         msg = f"name={i[0]};" + \
               f"email={i[1]};" + \
               f"phone={i[2]};" + \
-              f"ssn={i[3]};"+ \
+              f"ssn={i[3]};" + \
               f"password={i[4]};" + \
               f"ip={i[5]};" + \
               f"last_login={i[6]};" + \
               f"user_agent={i[7]};"
-        record = logging.LogRecord("use_data", logging.INFO, None, None, msg, None, None)
+        record = logging.LogRecord("use_data", logging.INFO, None, None,
+                                   msg, None, None)
         print(RedactingFormatter(PII_FIELDS).format(record))
     cursor.close()
     db.close()
+
 
 if __name__ == "__main__":
     main()
