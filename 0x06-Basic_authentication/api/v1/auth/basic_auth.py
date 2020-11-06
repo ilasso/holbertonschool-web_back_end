@@ -66,7 +66,7 @@ class BasicAuth(Auth):
         user_object_from_credentials:
         returns the User instance based on his email and password.
         """
-        if user_email is None :
+        if user_email is None:
             return None
         if type(user_email) is not str:
             return None
@@ -74,7 +74,10 @@ class BasicAuth(Auth):
             return None
         if type(user_pwd) is not str:
             return None
-        useremail = User.search({"email": user_email})
+        try:
+            useremail = User.search({"email": user_email})
+        except Exception:
+            return None
         if not useremail:
             return None
         for i in useremail:
