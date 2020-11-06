@@ -10,4 +10,16 @@ class BasicAuth(Auth):
     """
     BasicAuth
     """
-    pass
+    def extract_base64_authorization_header(self,
+                                            authorization_header: str) -> str:
+        """
+        extract_base64_authorization_header
+        """
+        if not authorization_header:
+            return None
+        if type(authorization_header) is not str:
+            return None
+        spauthheader = authorization_header.split(' ')
+        if spauthheader[0] != "Basic":
+            return None
+        return spauthheader[1]
