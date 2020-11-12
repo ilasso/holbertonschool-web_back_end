@@ -35,7 +35,7 @@ def login() -> str:
 @app_views.route('/auth_session/logout', methods=['DELETE'],
                  strict_slashes=False)
 def logout() -> str:
-    """ DELETE /auth_session/llogout
+    """ DELETE /auth_session/logout
     Return:
         - json string
     """
