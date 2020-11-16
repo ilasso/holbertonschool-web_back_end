@@ -22,7 +22,7 @@ class Auth:
     def __init__(self):
         self._db = DB()
 
-    def register_user(self, email: str, password: str) -> TypeVar('User'):
+    def register_user(self, email: str, password: str) -> User:
         """ hash the password with _hash_password
             save the user to the database using self._db
             return the User object
