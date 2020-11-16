@@ -33,6 +33,5 @@ class Auth:
             user = None
         if user:
             raise ValueError(f'User {email} already exists')
-        pd = _hash_password(password)
-        reg_user = self._db.add_user(email, pd)
-        return reg_user
+        passw = _hash_password(password)
+        return self._db.add_user(email, passw)
