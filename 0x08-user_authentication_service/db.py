@@ -46,7 +46,12 @@ class DB:
         """ returns the first row found in the users table
             as filtered by the method’s input arguments
         """
-        if not User.__dict__.get(*kwargs):
+        sw = False
+        for i in User.__table__.columns:
+            a = f"{i}"
+            if a.split(".")[1] in kwargs:
+                sw = True
+        if not sw:
             raise InvalidRequestError
         obj = self._session.query(User).filter_by(**kwargs).first()
         if not obj:
