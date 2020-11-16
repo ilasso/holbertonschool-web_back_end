@@ -48,13 +48,9 @@ class DB:
         """
         if not kwargs:
             raise InvalidRequestError
-        sw = False
-        for i in User.__table__.columns:
-            a = f"{i}"
-            if a.split(".")[1] in kwargs:
-                sw = True
-        if not sw:
-            raise InvalidRequestError
+        for i in kwargs:
+            if i not in User.__table__.columns:
+                raise InvalidRequestError
         obj = self._session.query(User).filter_by(**kwargs).first()
         if not obj:
             raise NoResultFound
