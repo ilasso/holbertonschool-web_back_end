@@ -46,6 +46,8 @@ class DB:
         """ returns the first row found in the users table
             as filtered by the method’s input arguments
         """
+         if not kwargs:
+            raise InvalidRequestError
         sw = False
         for i in User.__table__.columns:
             a = f"{i}"
