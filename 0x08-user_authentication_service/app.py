@@ -21,8 +21,9 @@ def users() -> str:
         Return: message, HTTP code
     """
     email = request.form.get('email')
-
+    print(email)
     password = request.form.get('password')
+    print(password)
 
     try:
         AUTH.register_user(email, password)
@@ -42,6 +43,17 @@ def login():
     response = jsonify({'email': email, 'message': 'logged in'})
     response.set_cookie('session_id', session_id)
     return response
+
+
+@app.route('/sessions', methods=['DELETE'], strict_slashes=False)
+def logout():
+    """response to the DELETE /sessions route"""
+    session_id = request.cookies.get('session_id')
+    user = AUTH.get_user_from_session_id(session_id)
+    if not user:
+        abort(403)
+    AUTH.destroy_session(user.id)
+    return redirect('/')
 
 
 if __name__ == "__main__":
