@@ -20,6 +20,9 @@ class Auth:
     """
 
     def __init__(self):
+        """
+        constructor
+        """
         self._db = DB()
 
     def register_user(self, email: str, password: str) -> User:
