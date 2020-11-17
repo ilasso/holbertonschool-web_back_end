@@ -87,7 +87,7 @@ class Auth:
         if user_id:
             self._db.update_user(user_id, session_id=None)
 
-    def get_reset_password_token(self, email: str) -> str:
+    def get_reset_password_token(self, email) -> str:
         """ If it exists, generate a UUID and
             update the user’s reset_token database field
             Return: the token
