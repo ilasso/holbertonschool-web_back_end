@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
+"""
+test_client
+"""
 import unittest
 from client import GithubOrgClient
 from unittest.mock import patch, Mock, PropertyMock
 from unittest import mock
 from parameterized import parameterized
-"""
-test_client
-"""
 
 class TestGithubOrgClient(unittest.TestCase):
     """
@@ -52,3 +52,7 @@ class TestGithubOrgClient(unittest.TestCase):
             self.assertEqual(res, ["google", "abc"])
             mock_get_json.assert_called_once()
             mock_public.assert_called_once()
+
+
+if __name__ == '__main__':
+    unittest.main()
