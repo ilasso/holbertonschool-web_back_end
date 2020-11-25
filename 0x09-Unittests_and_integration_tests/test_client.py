@@ -73,6 +73,7 @@ class TestGithubOrgClient(unittest.TestCase):
 )
 class TestIntegrationGithubOrgClient(unittest.TestCase):
     """ class TestIntegrationGithubOrgClient """
+
     @classmethod
     def setUpClass(cls):
         """set up class"""
@@ -118,5 +119,6 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
         self.get.assert_has_calls([call("https://api.github.com/orgs/x"),
                                    call(self.org_payload["repos_url"])])
 
-if __name__ == '__main__':
-    unittest.main()
+
+# if __name__ == '__main__':
+#    unittest.main()
