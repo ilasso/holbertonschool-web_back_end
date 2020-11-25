@@ -66,5 +66,18 @@ class TestGithubOrgClient(unittest.TestCase):
         self.assertEqual(res, expected)
 
 
+class TestIntegrationGithubOrgClient(unittest.TestCase):
+    """ class TestIntegrationGithubOrgClient """
+    @classmethod
+    def setUpClass(cls):
+        """set up class"""
+        cls.get_patcher = patch('requests.get', side_effect=HTTPError)
+
+    @classmethod
+    def tearDownClass(cls):
+        """tear down class"""
+        cls.get_patcher.stop()
+
+
 if __name__ == '__main__':
     unittest.main()
