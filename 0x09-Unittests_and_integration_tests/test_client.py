@@ -90,7 +90,7 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
 
         options = {cls.org_payload["repos_url"]: repos_mock}
         cls.get.side_effect = lambda y: options.get(y, org_mock)
-        cls.get_patcher = patch('requests.get', side_effect=HTTPError)
+        # cls.get_patcher = patch('requests.get', side_effect=HTTPError)
 
     @classmethod
     def tearDownClass(cls):
