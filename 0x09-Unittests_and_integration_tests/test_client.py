@@ -4,7 +4,7 @@ test_client
 """
 import unittest
 from client import GithubOrgClient
-from unittest.mock import patch, Mock, PropertyMock
+from unittest.mock import patch, Mock, PropertyMock, call
 from unittest import mock
 from parameterized import parameterized, parameterized_class
 from fixtures import TEST_PAYLOAD
@@ -97,6 +97,26 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
         """tear down class"""
         cls.get_patcher.stop()
 
+    def test_public_repos(self):
+            """ public repos test """
+            y = GithubOrgClient("x")
+            self.assertEqual(y.org, self.org_payload)
+            self.assertEqual(y.repos_payload, self.repos_payload)
+            self.assertEqual(y.public_repos(), self.expected_repos)
+            self.assertEqual(y.public_repos("NONEXISTENT"), [])
+            self.get.assert_has_calls([call("https://api.github.com/orgs/x"),
+                                       call(self.org_payload["repos_url"])])
+
+    def test_public_repos_with_license(self):
+        """ public repos test """
+        y = GithubOrgClient("x")
+        self.assertEqual(y.org, self.org_payload)
+        self.assertEqual(y.repos_payload, self.repos_payload)
+        self.assertEqual(y.public_repos(), self.expected_repos)
+        self.assertEqual(y.public_repos("NONEXISTENT"), [])
+        self.assertEqual(y.public_repos("apache-2.0"), self.apache2_repos)
+        self.get.assert_has_calls([call("https://api.github.com/orgs/x"),
+                                   call(self.org_payload["repos_url"])])
 
 if __name__ == '__main__':
     unittest.main()
