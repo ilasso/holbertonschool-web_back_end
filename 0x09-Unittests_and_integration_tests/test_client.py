@@ -65,7 +65,7 @@ class TestGithubOrgClient(unittest.TestCase):
         res = (g_client.has_license(repo, license))
         self.assertEqual(res, expected)
 
-
+@parameterized.expand([])
 class TestIntegrationGithubOrgClient(unittest.TestCase):
     """ class TestIntegrationGithubOrgClient """
     @classmethod
