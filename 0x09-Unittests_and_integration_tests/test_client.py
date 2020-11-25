@@ -8,6 +8,7 @@ from unittest.mock import patch, Mock, PropertyMock, call
 from unittest import mock
 from parameterized import parameterized, parameterized_class
 from fixtures import TEST_PAYLOAD
+import requests
 
 
 class TestGithubOrgClient(unittest.TestCase):
@@ -91,7 +92,6 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
 
         options = {cls.org_payload["repos_url"]: repos_mock}
         cls.get.side_effect = lambda y: options.get(y, org_mock)
-        # cls.get_patcher = patch('requests.get', side_effect=HTTPError)
 
     @classmethod
     def tearDownClass(cls):
@@ -99,14 +99,14 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
         cls.get_patcher.stop()
 
     def test_public_repos(self):
-            """ public repos test """
-            y = GithubOrgClient("x")
-            self.assertEqual(y.org, self.org_payload)
-            self.assertEqual(y.repos_payload, self.repos_payload)
-            self.assertEqual(y.public_repos(), self.expected_repos)
-            self.assertEqual(y.public_repos("NONEXISTENT"), [])
-            self.get.assert_has_calls([call("https://api.github.com/orgs/x"),
-                                       call(self.org_payload["repos_url"])])
+        """ public repos test """
+        y = GithubOrgClient("x")
+        self.assertEqual(y.org, self.org_payload)
+        self.assertEqual(y.repos_payload, self.repos_payload)
+        self.assertEqual(y.public_repos(), self.expected_repos)
+        self.assertEqual(y.public_repos("NONEXISTENT"), [])
+        self.get.assert_has_calls([call("https://api.github.com/orgs/x"),
+                                   call(self.org_payload["repos_url"])])
 
     def test_public_repos_with_license(self):
         """ public repos test """
