@@ -42,9 +42,27 @@ def main():
 def get_locale():
     """
     determine the best match with our supported languages.
+    by this priority:
+    1. Locale from URL parameters
+    2. Locale from user settings
+    3. Locale from request header
+    4. Default locale
+
     """
+    # 1 - from url parameters
     if request.args.get('locale') in cfg.LANGUAGES:
         return request.args.get('locale')
+    # 2 - from user settings
+    try:
+        lang = g.user.get('locale')
+        if lang in cfg.LANGUAGES:
+            return g.user['locale']
+    except AttributeError:
+        pass
+    # 3 from request header
+    if request.headers.get('locale'):
+        return request.headers.get('locale')
+    # 4 default locale
     return request.accept_languages.best_match(cfg.LANGUAGES)
 
 
