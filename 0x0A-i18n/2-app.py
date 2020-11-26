@@ -11,6 +11,7 @@ babel = Babel(app)
 
 class Config:
     """
+    config babel
     """
     LANGUAGES = ["en", "fr"]
     BABEL_DEFAULT_LOCALE = 'fr'

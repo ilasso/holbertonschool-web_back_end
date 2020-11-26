@@ -11,6 +11,7 @@ babel = Babel(app)
 
 class Config:
     """
+    config babel
     """
     LANGUAGES = ["en", "fr"]
     BABEL_DEFAULT_LOCALE = 'fr'
@@ -27,7 +28,7 @@ def main():
     """
     defines main route to the app and render html
     """
-    return render_template('3-index.html')
+    return render_template('4-index.html')
 
 
 @babel.localeselector
