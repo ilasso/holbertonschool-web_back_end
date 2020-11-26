@@ -8,6 +8,7 @@ from flask_babel import Babel
 app = Flask(__name__)
 babel = Babel(app)
 
+
 class Config:
     """
     defines default babel values
@@ -16,14 +17,11 @@ class Config:
     BABEL_DEFAULT_LOCALE = 'en'
     BABEL_DEFAULT_TIMEZONE = 'UTC'
 
+
 cfg = Config()
 app.config['BABEL_DEFAULT_LOCALE'] = cfg.BABEL_DEFAULT_LOCALE
 app.config['BABEL_DEFAULT_TIMEZONE'] = cfg.BABEL_DEFAULT_TIMEZONE
 
-
-"""app.config.from_object(Config)
-print(app.config)
-print(app.config)"""
 
 @app.route('/', methods=['GET'], strict_slashes=False)
 def main():
@@ -31,7 +29,6 @@ def main():
     defines main route to the app and render html
     """
     return render_template('1-index.html')
-
 
 
 if __name__ == "__main__":

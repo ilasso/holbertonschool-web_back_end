@@ -8,12 +8,14 @@ from flask_babel import Babel
 app = Flask(__name__)
 babel = Babel(app)
 
+
 class Config:
     """
     """
     LANGUAGES = ["en", "fr"]
     BABEL_DEFAULT_LOCALE = 'fr'
     BABEL_DEFAULT_TIMEZONE = 'UTC'
+
 
 cfg = Config()
 app.config['BABEL_DEFAULT_LOCALE'] = cfg.BABEL_DEFAULT_LOCALE
@@ -27,13 +29,13 @@ def main():
     """
     return render_template('2-index.html')
 
+
 @babel.localeselector
 def get_locale():
     """
     determine the best match with our supported languages.
     """
     return request.accept_languages.best_match(cfg.LANGUAGES)
-
 
 
 if __name__ == "__main__":

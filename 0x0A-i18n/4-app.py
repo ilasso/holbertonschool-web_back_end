@@ -35,6 +35,8 @@ def get_locale():
     """
     determine the best match with our supported languages.
     """
+    if request.args.get('locale') in cfg.LANGUAGES:
+        return request.args.get('locale')
     return request.accept_languages.best_match(cfg.LANGUAGES)
 
 
