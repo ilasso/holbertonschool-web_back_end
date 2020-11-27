@@ -4,6 +4,7 @@
 """
 from flask import Flask, jsonify, render_template, request
 from flask_babel import Babel, gettext
+import typing
 
 app = Flask(__name__)
 babel = Babel(app)
@@ -25,7 +26,7 @@ app.config['BABEL_DEFAULT_TIMEZONE'] = cfg.BABEL_DEFAULT_TIMEZONE
 
 
 @app.route('/', methods=['GET'], strict_slashes=False)
-def main():
+def main() -> str:
     """
     defines main route to the app and render html
     """
