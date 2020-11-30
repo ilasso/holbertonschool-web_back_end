@@ -5,6 +5,38 @@ exercise.py: module to basis redis
 from redis.client import Redis
 import uuid
 from typing import Union, Callable, Optional, Any
+from functools import wraps
+
+
+def count_calls(fn: Callable) -> Callable:
+    """
+    decorator count_calls
+    """
+    @wraps(fn)
+    def wrapper(self, *args, **kwargs):
+        """
+        execute redis incr to count # executes of
+        a function
+        """
+        self._redis.incr(fn.__qualname__)
+        return fn(self, *args, **kwargs)
+    return wrapper
+
+
+def call_history(fn: Callable) -> Callable:
+    """
+    decorator count_calls
+    """
+    @wraps(fn)
+    def wrapper(self, *args, **kwargs):
+        """
+        store the history of inputs and outputs for a particular function.
+        """
+        self._redis.rpush(f"{fn.__qualname__}:inputs", str(args))
+        res = fn(self, *args, **kwargs)
+        self._redis.rpush(f"{fn.__qualname__}:outputs", str(res))
+        return res
+    return wrapper
 
 
 class Cache:
@@ -19,6 +51,8 @@ class Cache:
         self._redis = Redis()
         self._redis.flushdb()
 
+    @call_history
+    @count_calls
     def store(self, data: Union[str, bytes, int, float]) -> str:
         """
         method that takes a data argument and returns a string.
@@ -29,5 +63,15 @@ class Cache:
         self._redis.set(id, data)
         return id
 
-# a = Cache()
-# print(a.store("hola,mundo"))
+    def get(self, key: str, fn: Callable = None) -> Union[str, bytes,
+                                                          int, float]:
+        """
+        method that take a key string argument and an optional
+        Callable argument named fn. This callable will be used
+        to convert the data back to the desired format
+        """
+        kvalue = self._redis.get(key)
+        value = kvalue
+        if kvalue and fn:
+            value = fn(kvalue)
+        return value
