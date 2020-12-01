@@ -19,7 +19,8 @@ def count_calls(method: Callable) -> Callable:
         a function
         """
         self._redis.incr(method.__qualname__)
-        return method(self, *args, **kwargs)
+        res = method(self, *args, **kwargs)
+        return res
     return wrapper
 
 
@@ -102,4 +103,4 @@ class Cache:
         """
         get_int
         """
-        return self._redis.get(key).decode("utf-8")
+        return int(self._redis.get(key).decode("utf-8"))
