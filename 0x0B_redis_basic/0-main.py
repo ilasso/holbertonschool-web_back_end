@@ -6,4 +6,4 @@ Cache = __import__('exercise').Cache
 cache = Cache()
 
 a = cache.store(b"first")
-print(a)
+print(type(a))
