@@ -8,17 +8,17 @@ from typing import Union, Callable, Optional, Any
 from functools import wraps
 
 
-def count_calls(fn: Callable) -> Callable:
+def count_calls(method: Callable) -> Callable:
     """
     decorator count_calls
     """
-    @wraps(fn)
+    @wraps(method)
     def wrapper(self, *args, **kwargs):
         """
         execute redis incr to count # executes of
         a function
         """
-        self._redis.incr(fn.__qualname__)
+        self._redis.incr(method.__qualname__)
         return fn(self, *args, **kwargs)
     return wrapper
 
