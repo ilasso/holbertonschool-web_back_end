@@ -40,3 +40,15 @@ class Cache:
         if key:
             result = self._redis.get(key)
             return fn(result) if fn else result
+
+    def get_str(self, key: str) -> str:
+        """
+        get_str
+        """
+        return self._redis.get(key).decode("utf-8")
+
+    def get_int(self, key: str) -> int:
+        """
+        get_int
+        """
+        return self._redis.get(key).decode("utf-8")
