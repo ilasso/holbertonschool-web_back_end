@@ -39,6 +39,22 @@ def call_history(fn: Callable) -> Callable:
     return wrapper
 
 
+def replay(fn: Callable):
+    """
+    function to display the history of calls of a particular function.
+    """
+    namelisti = f"{fn.__qualname__}:inputs"
+    namelisto = f"{fn.__qualname__}:outputs"
+    listi = fn.__self__._redis.lrange(namelisti, 0, -1)
+    listo = fn.__self__._redis.lrange(namelisto, 0, -1)
+    Q = fn.__self__._redis.get(fn.__qualname__).decode('utf8')
+    print(f"{fn.__qualname__} was called {Q} times")
+
+    for a, b in list(zip(listi, listo)):
+        attr, result = a.decode("utf-8"), b.decode("utf-8")
+        print(f"{fn.__qualname__}(*{attr}) -> {result}")
+
+
 class Cache:
     """
     Cache class.
