@@ -37,9 +37,11 @@ class Cache:
         Callable argument named fn. This callable will be used
         to convert the data back to the desired format
         """
-        if key:
-            result = self._redis.get(key)
-            return fn(result) if fn else result
+        kvalue = self._redis.get(key)
+        value = kvalue
+        if kvalue and fn:
+            value = fn(kvalue)
+        return value
 
     def get_str(self, key: str) -> str:
         """
