@@ -2,11 +2,12 @@
 """ Main file """
 
 Cache = __import__('exercise').Cache
+#Cache = __import__('ex').Cache
 
 cache = Cache()
 
-a = cache.store(b"first")
-print(a)
+cache.store(b"first")
+
 print(cache.get(cache.store.__qualname__))
 
 cache.store(b"second")
