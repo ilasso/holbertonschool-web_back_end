@@ -24,6 +24,7 @@ class Cache:
         """
         method that takes a data argument and returns a string.
         The method should generate a random key (e.g. using uuid)
+        store the input data in Redis using the random key and return the key
         """
         key = str(uuid4())
         self._redis.set(key, data)
@@ -36,8 +37,6 @@ class Cache:
         Callable argument named fn. This callable will be used
         to convert the data back to the desired format
         """
-        kvalue = self._redis.get(key)
-        value = kvalue
-        if kvalue and fn:
-            value = fn(kvalue)
-        return value
+        if key:
+            result = self._redis.get(key)
+            return fn(result) if fn else result
