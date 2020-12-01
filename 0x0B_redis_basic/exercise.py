@@ -2,8 +2,8 @@
 """
 exercise.py: module to basis redis
 """
-from redis import Redis
-import uuid
+import redis
+from uuid import uuid4
 from typing import Union, Callable, Optional, Any
 from functools import wraps
 
@@ -17,7 +17,7 @@ class Cache:
         store an instance of the Redis client as a private variable named
         _redis and flush the instance using flushdb
         """
-        self._redis = Redis()
+        self._redis = redis.Redis()
         self._redis.flushdb()
 
     def store(self, data: Union[str, bytes, int, float]) -> str:
@@ -26,6 +26,6 @@ class Cache:
         The method should generate a random key (e.g. using uuid),
         store the input data in Redis using the random key and return the key
         """
-        id = str(uuid.uuid4())
+        id = str(uuid4())
         self._redis.set(id, data)
         return id
