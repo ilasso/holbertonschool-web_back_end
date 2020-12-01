@@ -75,8 +75,8 @@ class Cache:
         The method should generate a random key (e.g. using uuid),
         store the input data in Redis using the random key and return the key
         """
-        id = str(uuid.uuid4())
-        self._redis.set(id, data.decode('utf8'))
+        id = str(uuid.uuid1())
+        self._redis.mset({id: data.decode('utf8')})
         return id
 
     def get(self, key: str, fn: Callable = None) -> Union[str, bytes,
