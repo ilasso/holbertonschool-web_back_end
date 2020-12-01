@@ -2,7 +2,7 @@
 """
 exercise.py: module to basis redis
 """
-from redis.client import Redis
+from redis import Redis
 import uuid
 from typing import Union, Callable, Optional, Any
 from functools import wraps
