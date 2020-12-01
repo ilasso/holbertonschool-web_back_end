@@ -48,7 +48,7 @@ def replay(fn: Callable):
     listi = fn.__self__._redis.lrange(namelisti, 0, -1)
     listo = fn.__self__._redis.lrange(namelisto, 0, -1)
     Q = fn.__self__._redis.get(fn.__qualname__).decode('utf8')
-    print(f"{fn.__qualname__} was called {Q} times")
+    print(f"{fn.__qualname__} was called {Q} times:")
 
     for a, b in list(zip(listi, listo)):
         attr, result = a.decode("utf-8"), b.decode("utf-8")
