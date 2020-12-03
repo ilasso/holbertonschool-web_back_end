@@ -1,6 +1,6 @@
 -- stored procedure AddBonus that adds a new correction for a student.
 -- user_id, project_name, score
-DELIMITER |
+DELIMITER $$
 CREATE PROCEDURE AddBonus (
     IN user_id int,
     IN project_name varchar(255),
@@ -13,5 +13,5 @@ BEGIN
     INSERT INTO corrections (user_id, project_id, score)
     VALUES (user_id, (SELECT id FROM projects WHERE name = project_name), score);
 END;
-|
+$$
 
