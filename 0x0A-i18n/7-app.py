@@ -5,6 +5,7 @@
 from flask import Flask, render_template, request, g
 from flask_babel import Babel, gettext
 import pytz
+import typing
 
 app = Flask(__name__)
 babel = Babel(app)
@@ -68,7 +69,7 @@ def get_locale():
 
 
 @babel.timezoneselector
-def get_timezone():
+def get_timezone() -> str:
     """ getting timezone"""
     try:
         tmz = pytz.timezone(request.args.get('timezone'))
