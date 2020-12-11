@@ -1,4 +1,4 @@
-import getFullBudgetObject from "./9-getFullBudget.js"
+import getFullBudgetObject from "./9-getFullBudget"
 
 
 const result = getFullBudgetObject(20, 50 , 10)
