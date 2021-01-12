@@ -13,7 +13,7 @@ const app = http.createServer(
       case '/students':
 
         // read file
-        countStudents('database.csv')
+        countStudents(process.argv[2])
           .then(
             (dict) => {
               res.statusCode = 200;
@@ -30,7 +30,7 @@ const app = http.createServer(
             },
           )
           .catch((error) => {
-            console.log(error);
+            res.end(`${error.message}`);
           });
         break;
       default:
