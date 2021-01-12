@@ -28,7 +28,7 @@ function countStudents(path) {
       for (const row in dict) {
         if (row) console.log(`Number of students in ${row}: ${dict[row].length}. List: ${dict[row].join(', ')}`);
       }
-      return res();
+      return res(dict);
     });
   });
 }
