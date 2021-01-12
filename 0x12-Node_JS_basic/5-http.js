@@ -3,9 +3,12 @@ const countStudents = require('./3-read_file_async');
 
 const app = http.createServer(
   (req, res) => {
+    res.setHeader('Content-Type', 'text/plain');
     switch (req.url) {
       case '/':
+        res.statusCode = 200;
         res.write('Hello Holberton School!');
+        res.end();
         break;
       case '/students':
 
