@@ -16,7 +16,7 @@ function countStudents(path) {
   return new Promise((res, rej) => {
     fs.readFile(path, 'utf8', (err, data) => {
       let datos;
-      if (err) rej(Error('Cannot load the database'));
+      if (err) return rej(Error('Cannot load the database'));
       datos = data.split('\n');
       datos = datos.slice(1, datos.length - 1);
       console.log(`Number of students: ${datos.length}`);
@@ -28,6 +28,7 @@ function countStudents(path) {
       for (const row in dict) {
         if (row) console.log(`Number of students in ${row}: ${dict[row].length}. List: ${dict[row].join(', ')}`);
       }
+      return res();
     });
   });
 }
