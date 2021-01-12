@@ -20,7 +20,7 @@ function countStudents(path) {
     throw new Error('Cannot load the database');
   }
   datos = datos.slice(1, datos.length - 1);
-  console.log('Number of students:', datos.length);
+  console.log(`Number of students: ${datos.length}`);
   const dict = {};
   for (const row of datos) {
     if (!dict[row.split(',')[3]]) dict[row.split(',')[3]] = [];
