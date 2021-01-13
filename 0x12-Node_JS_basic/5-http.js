@@ -5,6 +5,7 @@ const app = http.createServer(
   (req, res) => {
     res.statusCode = 200;
     res.setHeader('Content-Type', 'text/plain');
+    res.write('This is the list of our students\n');
     switch (req.url) {
       case '/':
         res.write('Hello Holberton School!');
@@ -15,7 +16,6 @@ const app = http.createServer(
         countStudents(process.argv[2])
           .then(
             (dict) => {
-              res.write('This is the list of our students\n');
               let numofstudents = 0;
               for (const row in dict) {
                 if (row) numofstudents += dict[row].length;
