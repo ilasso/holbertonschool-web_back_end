@@ -3,20 +3,18 @@ const countStudents = require('./3-read_file_async');
 
 const app = http.createServer(
   (req, res) => {
+    res.statusCode = 200;
     res.setHeader('Content-Type', 'text/plain');
     switch (req.url) {
       case '/':
-        res.statusCode = 200;
         res.write('Hello Holberton School!');
         res.end();
         break;
       case '/students':
-
         // read file
         countStudents(process.argv[2])
           .then(
             (dict) => {
-              res.statusCode = 200;
               res.write('This is the list of our students\n');
               let numofstudents = 0;
               for (const row in dict) {
@@ -34,10 +32,9 @@ const app = http.createServer(
           });
         break;
       default:
+        res.end();
         break;
     }
-
-    //    res.end();
   },
 ).listen(1245);
 
