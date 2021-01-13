@@ -28,7 +28,7 @@ const app = http.createServer(
             },
           )
           .catch((error) => {
-            res.end(`${error.message}`);
+            res.end(error.message);
           });
         break;
       default:
