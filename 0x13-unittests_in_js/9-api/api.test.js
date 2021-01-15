@@ -20,7 +20,9 @@ describe('GET /cart/:id', () => {
     request('http://localhost:7865/cart/12',(err, res, body)=> {
       if (res) {
         expect(res.statusCode).to.equal(200);
+        expect(res.statusMessage).to.equal('OK');
         expect(res.body).to.equal('Payment methods for cart 12');
+        done();
       };
       });
       done();
@@ -29,6 +31,7 @@ describe('GET /cart/:id', () => {
     request('http://localhost:7865/cart/twelve', (err, res, body) => {
       if (res) {
         expect(res.statusCode).to.equal(404);
+        done();
       };
       });
       done();
