@@ -8,7 +8,10 @@ it('async testing Promise', function(done) {
     getPaymentTokenFromAPI(true)
       .then((res) => {
         expect(res).to.eql({ data: 'Successful response from the API' })
-      });
-      done();
+        done();
+      }).catch((err) => {
+        done(err);
+      });;
+      
   });
 });
