@@ -25,7 +25,7 @@ describe('GET /cart/:id', () => {
         done();
       };
       });
-      done();
+      
   })
   it('correct status if id isNaN', function(done) {
     request('http://localhost:7865/cart/twelve', (err, res, body) => {
@@ -34,6 +34,6 @@ describe('GET /cart/:id', () => {
         done();
       };
       });
-      done();
+
   });
 });
